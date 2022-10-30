@@ -1,6 +1,6 @@
 import axios from "axios";
 //const base_url = "http://127.0.0.1:3000/";
-const base_url = "http://api.ytk888.de";
+const base_url = "http://api.ytk888.de/";
 export function metamaskLogin(
   addr: string,
   sign: string,
