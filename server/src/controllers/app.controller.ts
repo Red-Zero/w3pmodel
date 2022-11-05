@@ -27,28 +27,4 @@ export class AppController {
       return getError(err.msg, null);
     }
   }
-  @Post('/user/info')
-  @HttpCode(200)
-  async getUser(@Body() body) {
-    try {
-      const { address, wallet_type } = body;
-      const data = await this.appService.getUser(address, wallet_type);
-      return getSucess(data);
-    } catch (err) {
-      console.log(err.stack);
-      return getError(err.msg, null);
-    }
-  }
-  @Post('/user/update')
-  @HttpCode(200)
-  async updateUser(@Body() body) {
-    try {
-      const { user } = body;
-      const data = await this.appService.updateUser(user);
-      return getSucess(data);
-    } catch (err) {
-      console.log(err.stack);
-      return getError(err.msg, null);
-    }
-  }
 }

@@ -18,5 +18,20 @@
         "forceConsistentCasingInFileNames": false,
         "noFallthroughCasesInSwitch": false,
         "resolveJsonModule": true,
+
+        "paths":{
+            "@controllers/*":["src/controllers/*"],
+            "@services/*":["src/services/*"],
+            "@modules/*":["src/modules/*"],
+            "@lib/*":["src/lib/*"],
+            "@utils/*":["src/utils/*"],
+            "@middleware/*":["src/middleware/*"],
+            "@entity/*":["src/entity/*"],
+            "@constants/*":["src/constants/*"],
+            "@config/*":["src/getConfig/*"],
+            "@cache/*":["src/cache/*"],
+            "@contracts/*":["src/contracts/*"],
+
+          }
     }
 }

@@ -28,10 +28,13 @@
     "bignumber.js": "^9.0.2",
     "config": "^3.3.7",
     "ethers": "^5.7.2",
+    "ioredis": "^4.28.5",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.3",
     "mysql2": "^2.3.3",
     "node-schedule": "^2.1.0",
     "reflect-metadata": "^0.1.13",
+    "request-validate": "^1.0.9",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "typeorm": "^0.3.6"

@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { ethers } from 'ethers';
 import { User } from 'src/entity/user';
 import WALLET_TYPE from 'src/constans/walletType';
-import { find } from 'rxjs';
+import { createUserToken } from '@lib/jwt';
 
 @Injectable()
 export class AppService {
@@ -24,7 +24,7 @@ export class AppService {
     sign: string,
     time: number,
     message: string,
-  ): Promise<User> {
+  ): Promise<any> {
     MetamaskSignVerify(address, sign, time, message);
     //查找用户
     let user = await AppDataSource.manager.findOne(User, {
@@ -38,45 +38,14 @@ export class AppService {
       user = new User();
       user.address = address;
       user.wallet_type = WALLET_TYPE.MetaMask;
+      user.company = '';
+      user.profession = '';
       user.created_at = moment().toDate();
+      user.updated_at = user.created_at;
       user = await AppDataSource.manager.save(User, user);
     }
-    return user;
-  }
-  /**
-   * //获取用户信息
-   * @param addr 钱包地址
-   * @param wallet_type 钱包类型
-   * @returns
-   */
-  async getUser(address, wallet_type): Promise<User> {
-    return await AppDataSource.manager.findOne(User, {
-      where: {
-        address,
-        wallet_type,
-      },
-    });
-  }
-  async updateUser(userModel: any): Promise<User> {
-    const user = await AppDataSource.manager.findOne(User, {
-      where: {
-        address: userModel.address,
-        wallet_type: userModel.wallet_type,
-      },
-    });
-    if (!user) {
-      return null;
-    }
-    user.nick_name = userModel.nick_name || '';
-    user.twitter = userModel.twitter || '';
-    user.linked_in = userModel.linked_in || '';
-    user.github = userModel.github || '';
-    user.instagram = userModel.instagram || '';
-    user.facebook = userModel.facebook || '';
-    user.telegram = userModel.telegram || '';
-    user.discord = userModel.discord || '';
-    await AppDataSource.manager.save(User, user);
-    return user;
+    const token = await createUserToken(user);
+    return { user, token };
   }
 }
 
